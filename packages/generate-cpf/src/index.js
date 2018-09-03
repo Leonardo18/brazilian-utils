@@ -11,9 +11,9 @@ function generateCheckDigit({ cpf, length }) {
 
 export default function generateCpf({ state } = {}) {
   const stateCode = Object.keys(STATES_CODE).includes(state) ? STATES_CODE[state] : generateRandomNumber();
-  const cpf = generateRandomNumber(CPF_LENGTH - 3) + stateCode;
-  const firstCheckDigit = generateCheckDigit({ cpf, length: 10 });
-  const secondCheckDigit = generateCheckDigit({ cpf, length: 11 });
+  const base = generateRandomNumber(CPF_LENGTH - 3) + stateCode;
+  const firstCheckDigit = generateCheckDigit({ cpf: base, length: 10 });
+  const secondCheckDigit = generateCheckDigit({ cpf: base, length: 11 });
 
-  return cpf + firstCheckDigit + secondCheckDigit;
+  return base + firstCheckDigit + secondCheckDigit;
 }
